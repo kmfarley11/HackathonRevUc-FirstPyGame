@@ -1,12 +1,13 @@
 __author__ = 'Kevin'
 import pygame
 import design
-
-class Player(pygame.sprite.Sprite):
+import random
+'''
+class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = self.playerSide[0][0]
-        #self.image.fill(design.RED)
+        #self.image = self.enemySide[0][0]
+        self.image.fill(design.RED)
         self.rect = self.image.get_rect()
         self.side = 0
         self.speed = 10
@@ -50,3 +51,4 @@ class Player(pygame.sprite.Sprite):
     playerSide = [playerSide1, playerSide2]
 
     playerSword = [pygame.image.load('resources/sprite_5.png'),pygame.image.load('resources/sprite_6.png'),pygame.image.load('resources/sprite_7.png'),pygame.image.load('resources/sprite_8.png')]
+'''

@@ -8,15 +8,20 @@ RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 
+# set up screen sizing
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+
+
+
 # image loading
-bckgrnd = pygame.image.load('resources/green.png')
+bckgrnd = pygame.image.load('resources/nes_zelda_tour_screenshot1.png')
 background = pygame.transform.scale(bckgrnd,(1280, 720))
-playerLeft1 = pygame.image.load('resources/sprite_1.png')
-playerLeft2 = pygame.image.load('resources/sprite_2.png')
 
 def drawBackground(screen, background):
     screen.blit(background, [0, 0])
 
+'''
 def refreshScreen(screen,right,down,one):
     #screen.fill(GREEN)
     #pygame.draw.circle(screen, RED, (right, down), 25, 1)
@@ -26,3 +31,4 @@ def refreshScreen(screen,right,down,one):
     elif(not one):
         screen.blit(playerLeft2, [right, down])
     pygame.display.update()
+    '''

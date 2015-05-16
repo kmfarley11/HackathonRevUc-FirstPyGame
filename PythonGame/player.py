@@ -8,9 +8,14 @@ class Player(pygame.sprite.Sprite):
         self.image = self.playerSide[0][0]
         #self.image.fill(design.RED)
         self.rect = self.image.get_rect()
+        self.rect.x = 100
+        self.rect.y = 320
         self.side = 0
         self.speed = 10
         self.it = 0
+        self.health = 100
+        self.sword = 0
+        self.state = "walking"
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -39,11 +44,14 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_SPACE]:
             self.image = self.playerSword[self.sword]
+            self.state = "attacking"
             return
 
 
         if self.it % 3 == 0 : self.image = self.playerSide[self.side][0]
         else : self.image = self.playerSide[self.side][1]
+
+        self.state = "walking"
 
     playerSide1 = [pygame.image.load('resources/sprite_1.png'),pygame.image.load('resources/sprite_2.png')]
     playerSide2 = [pygame.image.load('resources/sprite_3.png'),pygame.image.load('resources/sprite_4.png')]

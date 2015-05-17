@@ -25,7 +25,6 @@ class Game(object):
         # Create the enemy(ies)
         self.my_enemy = enemy.Enemy()
         self.enemy_list.add(self.my_enemy)
-        self.my_enemy.rect.fit
         self.all_sprites_list.add(self.my_enemy)
 
         '''
@@ -73,12 +72,12 @@ class Game(object):
                     self.startTime = time.time()
                     self.my_enemy.health -= 1
 
-                    #design.bounce(self.my_enemy)
+                    #design.bounce(self.my_enemy)# for later implementation?
                     # sword position must match up with collision area to do damage
 
                 else :
                     self.player.health -= 1
-                    #design.bounce(self.player)
+                    #design.bounce(self.player) # for later implementation?
                 print('player health: ',self.player.health)
                 print('enemy health: ',self.my_enemy.health)
                 print('collision occurred')
@@ -94,7 +93,7 @@ class Game(object):
     def frameDisplay(self, screen):
         """ Display everything to the screen for the game. """
         #screen.fill(design.GREEN)
-        design.makeWalls(screen)
+        #dsign.makeWalls(screen)
         screen.blit(design.background, [0, 0])
         #pygame.draw.rect(screen,design.BLUE,pygame.Surface.Rect,50)
         if self.game_over:

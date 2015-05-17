@@ -2,11 +2,11 @@ __author__ = 'Kevin'
 import pygame
 import design
 
+# this file/ class will control moving and image events for the player
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = self.playerSide[0][0]
-        #self.image.fill(design.RED)
         self.rect = self.image.get_rect()
         self.rect.x = 100
         self.rect.y = 320
@@ -17,6 +17,8 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.state = "walking"
 
+    # update position/ image
+    # side indexes into stored images
     def update(self, x, y):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and not self.rect.colliderect(design.right):
@@ -40,8 +42,10 @@ class Player(pygame.sprite.Sprite):
             self.side = 3
             if self.rect.y > y : self.facingEnemy = True
 
+        # reset count if it gets too big
         if self.it > 1000 : self.it = 0
 
+        # for sword animations only, get space key event
         if pygame.key.get_pressed()[pygame.K_SPACE]:
             if self.it % 3 == 0 : self.image = self.playerSword[0][self.side]
             else : self.image = self.playerSword[1][self.side]
@@ -55,6 +59,7 @@ class Player(pygame.sprite.Sprite):
 
         self.state = "walking"
 
+    # store all loaded player sprites in various multi level arrays
     playerSide1 = [pygame.image.load('resources/sprite_1.png'),pygame.image.load('resources/sprite_2.png'),pygame.image.load('resources/sprite_3.png'),pygame.image.load('resources/sprite_4.png')]
     playerSide2 = [pygame.image.load('resources/sprite_5.png'),pygame.image.load('resources/sprite_6.png'),pygame.image.load('resources/sprite_7.png'),pygame.image.load('resources/sprite_8.png')]
     playerSide = [playerSide1, playerSide2]

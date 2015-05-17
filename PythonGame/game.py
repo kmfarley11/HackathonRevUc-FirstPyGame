@@ -70,17 +70,14 @@ class Game(object):
             # Move all the sprites
             self.all_sprites_list.update(self.player.rect.x,self.player.rect.y)
 
-            i = 0
             for en in self.enemy_list:
                 if en.health <= 0:
                     #en.update2(en.rect.x,en.rect.y,True)
+                    en.hidden = True
                     self.enemy_list.remove(en)
-                    i += 1
-
-            self.enemyDefeated = (i == len(self.enemy_list))
 
             # See if the player block has collided with anything.
-            blocks_hit_list = pygame.sprite.spritecollide(self.player, self.enemy_list, self.enemyDefeated)
+            blocks_hit_list = pygame.sprite.spritecollide(self.player, self.enemy_list, len(self.enemy_list) == 0)
 
             self.enemyDefeated = False
 
@@ -91,7 +88,7 @@ class Game(object):
                     enem.health -= 2
                     deltax = enem.rect.x - self.player.rect.x
                     deltay = enem.rect.y - self.player.rect.y
-                    enem.update2(deltax,deltay,False)
+                    enem.update2(deltax,deltay)
 
                     #design.bounce(self.my_enemy)# for later implementation?
                     # sword position must  match up with collision area to do damage
@@ -118,13 +115,20 @@ class Game(object):
         """ Display everything to the screen for the game. """
         #screen.fill(design.GREEN)
         #dsign.makeWalls(screen)
+        font = pygame.font.SysFont("sans-serif", 80)
         screen.blit(design.background, [0, 0])
+        text0 = font.render("Lvl. "+str(design.difficulty),True,design.RED)
+        #font.init()
+        lowLeftX = (150 // 2) - (text0.get_width() // 2)
+        lowLeftY = (720 // 2) - (text0.get_height() // 2)
+        screen.blit(design.background, [0, 0])
+        screen.blit(text0, [lowLeftX, lowLeftY])
         #pygame.draw.rect(screen,design.BLUE,pygame.Surface.Rect,50)
         if self.game_over:
             # font = pygame.font.Font("Serif", 25)
-            font = pygame.font.SysFont("sans-serif", 50)
+            # font = pygame.font.SysFont("sans-serif", 50)
             if design.gameWon :
-                text = font.render("You won!!! click to restart",True,design.BLACK)
+                text = font.render("You won!!! click to continue",True,design.BLACK)
             else :
                 text = font.render("Game Over, click to restart", True, design.BLACK)
             center_x = (design.SCREEN_WIDTH // 2) - (text.get_width() // 2)

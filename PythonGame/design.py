@@ -1,5 +1,5 @@
 __author__ = 'Kevin'
-import pygame, player, enemy
+import pygame, game
 
 # set up the colors
 BLACK = (  0,   0,   0)
@@ -32,8 +32,16 @@ difficulty = 1
 bckgrnd = pygame.image.load('resources/zelda720.png')
 background = pygame.transform.scale(bckgrnd,(1280, 720))
 
+
 def drawBackground(screen, background):
+    font = pygame.font.SysFont("serif", 50)
+    text = font.render("DOING THINGS",True,RED)
+    #font.init()
+    lowLeftX = (SCREEN_WIDTH // 2) - (text.get_width() // 2)
+    lowLeftY = (SCREEN_HEIGHT // 2) - (text.get_height() // 2)
     screen.blit(background, [0, 0])
+    screen.blit(text, [lowLeftX, lowLeftY])
+    pygame.display.flip()
 
 '''
 def refreshScreen(screen,right,down,one):

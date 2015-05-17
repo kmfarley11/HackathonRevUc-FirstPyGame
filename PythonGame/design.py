@@ -18,6 +18,7 @@ left = pygame.Rect((0,0),(100,720))
 top = pygame.Rect((0,0),(1280,75))
 
 gameWon = False
+difficulty = 1
 
 #def makeWalls(screen) :
     # right? down? width height

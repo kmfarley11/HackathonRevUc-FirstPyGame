@@ -1,11 +1,13 @@
 __author__ = 'Kevin'
-import pygame
+import pygame, time
 import player, design, enemy
 
 class Game(object):
     """ This class represents an instance of the game. If we need to
         reset the game we'd just need to create a new instance of this
         class. """
+
+    startTime = time.time()
 
     def __init__(self):
         """ Constructor. Create all our attributes and initialize
@@ -23,6 +25,7 @@ class Game(object):
         # Create the enemy(ies)
         self.my_enemy = enemy.Enemy()
         self.enemy_list.add(self.my_enemy)
+        self.my_enemy.rect.fit
         self.all_sprites_list.add(self.my_enemy)
 
         '''
@@ -58,34 +61,49 @@ class Game(object):
         """
         if not self.game_over:
             # Move all the sprites
-            self.all_sprites_list.update()
+            self.all_sprites_list.update(self.player.rect.x,self.player.rect.y)
 
             # See if the player block has collided with anything.
             blocks_hit_list = pygame.sprite.spritecollide(self.player, self.enemy_list, self.my_enemy.health <= 0)
 
             # Check the list of collisions.
-            for block in blocks_hit_list:
-                if self.player.state == "attacking" :
+            for enem in blocks_hit_list:
+                if self.player.state == "attacking" and ((time.time()-self.startTime) * 1000) >= 100:
+                    self.canAttack = False
+                    self.startTime = time.time()
                     self.my_enemy.health -= 1
+
+                    #design.bounce(self.my_enemy)
+                    # sword position must match up with collision area to do damage
+
                 else :
                     self.player.health -= 1
+                    #design.bounce(self.player)
                 print('player health: ',self.player.health)
                 print('enemy health: ',self.my_enemy.health)
                 print('collision occurred')
 
-            if len(self.enemy_list) == 0 or self.player.health == 0 :
+            if len(self.enemy_list) == 0 :
+                design.gameWon = True
+                self.game_over = True
+            if self.player.health == 0 :
+                design.gameWon = False
                 self.game_over = True
 
 
     def frameDisplay(self, screen):
         """ Display everything to the screen for the game. """
-       #screen.fill(design.GREEN)
+        #screen.fill(design.GREEN)
+        design.makeWalls(screen)
         screen.blit(design.background, [0, 0])
         #pygame.draw.rect(screen,design.BLUE,pygame.Surface.Rect,50)
         if self.game_over:
             # font = pygame.font.Font("Serif", 25)
-            font = pygame.font.SysFont("serif", 25)
-            text = font.render("Game Over, click to restart", True, design.BLACK)
+            font = pygame.font.SysFont("sans-serif", 50)
+            if design.gameWon :
+                text = font.render("You won!!! click to restart",True,design.BLACK)
+            else :
+                text = font.render("Game Over, click to restart", True, design.BLACK)
             center_x = (design.SCREEN_WIDTH // 2) - (text.get_width() // 2)
             center_y = (design.SCREEN_HEIGHT // 2) - (text.get_height() // 2)
             screen.blit(text, [center_x, center_y])

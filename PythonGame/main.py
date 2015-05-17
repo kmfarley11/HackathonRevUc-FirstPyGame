@@ -16,7 +16,6 @@ def main():
     down = 50
     #screen.blit(pygame.image.load('resources/nes_zelda_tour_screenshot1.png'), [right, down])
 
-
     # This is the game loop, all events will occur here
     clock = pygame.time.Clock()
     thisGame = game.Game()

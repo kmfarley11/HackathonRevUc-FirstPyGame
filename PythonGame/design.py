@@ -32,6 +32,16 @@ difficulty = 1
 bckgrnd = pygame.image.load('resources/zelda720.png')
 background = pygame.transform.scale(bckgrnd,(1280, 720))
 
+# set up the sound
+pygame.mixer.pre_init(frequency=22050, size=-16, channels=1, buffer=4096)
+pygame.mixer.init(frequency=22050, size=-16, channels=1, buffer=4096)
+
+# play sound loop
+soundloop = pygame.mixer.Sound("resources/smooth rock.wav")
+soundwin = pygame.mixer.Sound("resources/winning.wav")
+soundloop.play(-1)
+
+
 
 def drawBackground(screen, background):
     font = pygame.font.SysFont("serif", 50)

@@ -9,6 +9,8 @@ class Game(object):
 
     startTime = time.time()
 
+
+
     def __init__(self):
         """ Constructor. Create all our attributes and initialize
         the game. """
@@ -124,13 +126,17 @@ class Game(object):
         screen.blit(design.background, [0, 0])
         screen.blit(text0, [lowLeftX, lowLeftY])
         #pygame.draw.rect(screen,design.BLUE,pygame.Surface.Rect,50)
+
         if self.game_over:
             # font = pygame.font.Font("Serif", 25)
             # font = pygame.font.SysFont("sans-serif", 50)
             if design.gameWon :
+                design.soundwin.play()
                 text = font.render("You won!!! click to continue",True,design.BLACK)
+
             else :
                 text = font.render("Game Over, click to restart", True, design.BLACK)
+                design.difficulty = 1
             center_x = (design.SCREEN_WIDTH // 2) - (text.get_width() // 2)
             center_y = (design.SCREEN_HEIGHT // 2) - (text.get_height() // 2)
             screen.blit(text, [center_x, center_y])

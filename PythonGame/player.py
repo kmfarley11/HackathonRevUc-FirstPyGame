@@ -16,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.it = 0
         self.health = 100
         self.state = "walking"
+        #self.hBar = (100,320)
 
     # update position/ image
     # side indexes into stored images

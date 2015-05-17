@@ -7,7 +7,6 @@ def main():
     pygame.init()
 
     # set up the window
-    screen = pygame.display.set_mode([design.SCREEN_WIDTH, design.SCREEN_HEIGHT])
     pygame.display.set_caption('MyGame')
     one = 1
     it = 0
@@ -26,7 +25,7 @@ def main():
 
         # TODO: later feature to not allow for two buttons held at same time
         thisGame.collisionCheck()
-        thisGame.frameDisplay(screen)
+        thisGame.frameDisplay(design.screen)
 
         # This call will regulate your FPS (to be 40 or less)
         clock.tick(40)

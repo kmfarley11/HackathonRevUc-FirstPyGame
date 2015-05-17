@@ -28,6 +28,8 @@ difficulty = 1
     #pygame.draw.rect(screen, BLACK, top,0)
     #pygame.display.update()
 
+screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+
 # image loading
 bckgrnd = pygame.image.load('resources/zelda720.png')
 background = pygame.transform.scale(bckgrnd,(1280, 720))
@@ -39,18 +41,22 @@ pygame.mixer.init(frequency=22050, size=-16, channels=1, buffer=4096)
 # play sound loop
 soundloop = pygame.mixer.Sound("resources/smooth rock.wav")
 soundwin = pygame.mixer.Sound("resources/winning.wav")
+soundhit = pygame.mixer.Sound("resources/Strong_Punch.wav")
+soundmiss = pygame.mixer.Sound("resources/Woosh.wav")
 soundloop.play(-1)
 
 
 
-def drawBackground(screen, background):
+def drawBackground(self,screen):
+    '''
     font = pygame.font.SysFont("serif", 50)
     text = font.render("DOING THINGS",True,RED)
     #font.init()
     lowLeftX = (SCREEN_WIDTH // 2) - (text.get_width() // 2)
     lowLeftY = (SCREEN_HEIGHT // 2) - (text.get_height() // 2)
-    screen.blit(background, [0, 0])
-    screen.blit(text, [lowLeftX, lowLeftY])
+    '''
+    screen.blit(self.background, [0, 0])
+    #screen.blit(text, [lowLeftX, lowLeftY])
     pygame.display.flip()
 
 '''

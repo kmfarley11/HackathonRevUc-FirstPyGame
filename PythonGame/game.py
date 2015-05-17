@@ -9,8 +9,6 @@ class Game(object):
 
     startTime = time.time()
 
-
-
     def __init__(self):
         """ Constructor. Create all our attributes and initialize
         the game. """
@@ -91,12 +89,12 @@ class Game(object):
                     deltax = enem.rect.x - self.player.rect.x
                     deltay = enem.rect.y - self.player.rect.y
                     enem.update2(deltax,deltay)
-
+                    design.soundhit.play()
                     #design.bounce(self.my_enemy)# for later implementation?
                     # sword position must  match up with collision area to do damage
-
                 else :
                     self.player.health -= 1
+
                     #design.bounce(self.player) # for later implementation?
                 print('player health: ',self.player.health)
                 i = 0
@@ -104,6 +102,8 @@ class Game(object):
                     print('enemy ', i,' health: ',enemy.health)
                     i += 1
                 print('collision occurred')
+            if self.player.state == "attacking" and len(blocks_hit_list) == 0 :
+                design.soundmiss.play()
 
             if len(self.enemy_list) == 0 :
                 design.gameWon = True
@@ -125,9 +125,13 @@ class Game(object):
         lowLeftY = (720 // 2) - (text0.get_height() // 2)
         screen.blit(design.background, [0, 0])
         screen.blit(text0, [lowLeftX, lowLeftY])
+        for enemy in self.enemy_list:
+            enemy.enemyBar(screen,enemy.rect.x,enemy.rect.y)
+        self.player.playerBar(screen,self.player.rect.x,self.player.rect.y)
         #pygame.draw.rect(screen,design.BLUE,pygame.Surface.Rect,50)
 
         if self.game_over:
+            design.drawBackground(design,screen)
             # font = pygame.font.Font("Serif", 25)
             # font = pygame.font.SysFont("sans-serif", 50)
             if design.gameWon :
@@ -139,6 +143,10 @@ class Game(object):
                 design.difficulty = 1
             center_x = (design.SCREEN_WIDTH // 2) - (text.get_width() // 2)
             center_y = (design.SCREEN_HEIGHT // 2) - (text.get_height() // 2)
+
+            for enemy in self.enemy_list:
+                enemy.kill()
+            self.player.kill()
             screen.blit(text, [center_x, center_y])
 
         if not self.game_over:

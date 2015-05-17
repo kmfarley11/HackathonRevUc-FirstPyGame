@@ -12,10 +12,17 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = 320
         '''
         self.side = 0
-        self.speed = 11
+        self.speed = 15
         self.it = 0
         self.hidden = False
-        self.health = 50
+        self.health = 40
+
+    def enemyBar(self, screen,x,y):
+        xx=0
+        for hp in range(self.health):
+            pygame.draw.rect(screen, design.GREEN, (x+60+xx,y-20,5,16), 0)
+            xx+= self.health/45
+
 
     #TODO: maybe add rand arithmetic to sometimes run away
     def update(self,x,y):
@@ -27,6 +34,8 @@ class Enemy(pygame.sprite.Sprite):
         if(self.rect.bottom < y + 175) and not self.rect.colliderect(design.bottom): self.rect.y += self.speed
         if(self.rect.left > x + 65) and not self.rect.colliderect(design.left): self.rect.x -= self.speed
         if(self.rect.top > y - 40) and not self.rect.colliderect(design.top): self.rect.y -= self.speed
+
+        #self.SingleColorBar()
 
     def update2(self,x,y):
 

@@ -11,12 +11,18 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = 100
         self.rect.y = 320
         self.side = 0
-        self.speed = 35
+        self.speed = 40
         self.facingEnemy = False
         self.it = 0
         self.health = 100
         self.state = "walking"
-        #self.hBar = (100,320)
+        #self.hBar = pygame.drawd
+
+    def playerBar(self, screen, x, y):
+        xx=0
+        for hp in range(self.health):
+            pygame.draw.rect(screen, design.GREEN, (x+65+xx,y+10,1,16), 0)
+            xx += self.health/100
 
     # update position/ image
     # side indexes into stored images
@@ -57,7 +63,6 @@ class Player(pygame.sprite.Sprite):
         if self.it % 3 == 0 : self.image = self.playerSide[0][self.side]
         else : self.image = self.playerSide[1][self.side]
         self.rect.fit(self.image.get_rect())
-
         self.state = "walking"
 
     # store all loaded player sprites in various multi level arrays

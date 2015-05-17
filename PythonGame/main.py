@@ -5,6 +5,15 @@ import pygame, design, game
 
 def main():
     pygame.init()
+    # set up the sound
+    pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=4096)
+
+    pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
+
+    # play sound loop
+    sound = pygame.mixer.Sound("resources/smooth rock.wav")
+    sound.play(loops = -1)
+
     # set up the window
     screen = pygame.display.set_mode([design.SCREEN_WIDTH, design.SCREEN_HEIGHT])
     pygame.display.set_caption('MyGame')
@@ -31,7 +40,8 @@ def main():
         clock.tick(40)
 
         if terminate : break
-
+    # stop sound
+    pygame.mixer.sound.stop()
     pygame.quit()
 
 if __name__ == "__main__": main()
